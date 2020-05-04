@@ -1,7 +1,7 @@
 from mycroft import MycroftSkill, intent_file_handler
 from tesla_powerwall_controller import PowerwallController
 
-class TelsaPowerwallSkill(MycroftSkill):
+class TeslaPowerwallSkill(MycroftSkill):
     def __init__(self):
         MycroftSkill.__init__(self)
         self.controller = None
@@ -42,5 +42,5 @@ class TelsaPowerwallSkill(MycroftSkill):
         self.speak(resp)
 
 def create_skill():
-    return TelsaPowerwallSkill()
+    return TeslaPowerwallSkill()
 
