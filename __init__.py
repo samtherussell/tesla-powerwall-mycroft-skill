@@ -12,7 +12,7 @@ class TelsaPowerwallSkill(MycroftSkill):
 
     def on_settings_changed(self):
         ip_address = self.settings.get('ip_address')
-        self.log.info("read ip address '{ip_address}' from settings")
+        self.log.info(f"read ip address '{ip_address}' from settings")
         if ip_address:
           self.controller = PowerwallController(ip_address)
 
