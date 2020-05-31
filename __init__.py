@@ -1,6 +1,6 @@
 from mycroft import MycroftSkill, intent_file_handler
 from tesla_powerwall_controller import PowerwallController
-from fuzzywuzzy import process
+from rapidfuzz import process
 
 class TeslaPowerwallSkill(MycroftSkill):
     def __init__(self):

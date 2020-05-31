@@ -1,2 +1,2 @@
 tesla-powerwall-controller>=0.2
-fuzzywuzzy
+rapidfuzz
