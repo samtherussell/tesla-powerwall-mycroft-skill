@@ -1,5 +1,6 @@
 from mycroft import MycroftSkill, intent_file_handler
 from tesla_powerwall_controller import PowerwallController
+from fuzzywuzzy import process
 
 class TeslaPowerwallSkill(MycroftSkill):
     def __init__(self):
@@ -26,11 +27,12 @@ class TeslaPowerwallSkill(MycroftSkill):
     @intent_file_handler('power.level.intent')
     def power_level(self, message):
         if not self.controller: raise Exception('IP address of tesla powerwall not set')
-        endpoint = message.data.get('endpoint')
-        self.log.info(f'power.level.intent: {endpoint}')
+        raw_endpoint = message.data.get('endpoint')
+        endpoint, score = process.extractOne(raw_endpoint, ['battery', 'solar panel', 'grid', 'house'])
+        self.log.info(f'power.level.intent: {raw_endpoint} matched {endpoint} with confidence {score}%')
         if endpoint == 'battery':
           resp = self.controller.get_battery_power()
-        elif 'panel' in endpoint:
+        elif endpoint == 'solar panel':
           resp = self.controller.get_solar_power()
         elif endpoint == 'grid':
           resp = self.controller.get_grid_power()
